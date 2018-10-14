@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="row text-center" v-else>
-                            <div class="col-xs-offset-3 text-right col-xs-6">
+                            <div class="col-xs-offset-1 text-right col-xs-8">
                                 <button type="button" class="btn btn-success  btn-sm"
                                         @click="getHelper(item,'swagger')">swagger3.0
                                 </button>
@@ -36,6 +36,9 @@
                                 </button>
                                 <button type="button" class="btn btn-success  btn-sm"
                                         @click="item.helper.isClose=true;item.tableIsClose=true">关闭
+                                </button>
+                                <button type="button" class="btn btn-success  btn-sm"
+                                        @click="deleteTable(item.database_dictionary.id)">移除
                                 </button>
                             </div>
                             <div class="col-xs-3">

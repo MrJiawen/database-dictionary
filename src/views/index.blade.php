@@ -242,15 +242,15 @@
                         /**
                          * 如果是第一次直接 打开了 hepler  但是没有 field 时候， 此刻是加载 字段，不进行 折叠操作。其余情境正常流程
                          */
-                        if(!(!this.plane.table[key].tableIsClose && this.plane.table[key].fields.length == 0)){
+                        if (!(!this.plane.table[key].tableIsClose && this.plane.table[key].fields.length == 0)) {
                             this.plane.table[key].tableIsClose = !this.plane.table[key].tableIsClose;
                         }
                         let that = this;
                         if (!this.plane.table[key].tableIsClose) {
-                            this.ajaxToGetTableConstruct({tableName:this.plane.table[key].tableName}, function (response) {
+                            this.ajaxToGetTableConstruct({tableName: this.plane.table[key].tableName}, function (response) {
                                 that.$set(that.plane.table[key], 'fields', response);
                             })
-                        }else{
+                        } else {
                             this.plane.table[key].helper.isClose = true;
                         }
                     },
@@ -267,6 +267,12 @@
                             })
                         })
                     },
+                    deleteTable: function (id) {
+                        let that = this;
+                        this.ajaxToDestroy({id: id}, function () {
+                            that.selectNavigation(that.plane.navigation_id);
+                        })
+                    },
                     tableChangeOrder: function (databaseDictionary) {
                         let that = this;
                         this.ajaxToUpdate(databaseDictionary, function () {
@@ -274,15 +280,15 @@
                         });
                     },
                     getHelper: function (item, type = null) {
-                        if(type !== null){
+                        if (type !== null) {
                             item.helper.selectType = type;
                             item.helper.isClose = false;
                             item.tableIsClose = false;
                         }
                         this.ajaxToHelper({tableName: item.tableName, ...item.helper}, function (response) {
-                            if(response.ServerNo == 200){
+                            if (response.ServerNo == 200) {
                                 item.helper.response = response.ServerData
-                            }else{
+                            } else {
                                 item.helper.response = response.ServerMsg
                             }
                         })
